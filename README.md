@@ -27,7 +27,11 @@ Using *yarn*
 
 Browser
 
-`<script src="https://unpkg.com/@edgarjeremy/sirius.adapter@1.0.5/dist/bundles/sirius.adapter.js"></script>`
+You can use unpkg CDN to get sirius.adapter bundled script, and put it in your script tag.
+
+- [Uncompressed](https://unpkg.com/@edgarjeremy/sirius.adapter@latest/dist/standalone/sirius-adapter.js)
+- [Minified](https://unpkg.com/@edgarjeremy/sirius.adapter@latest/dist/standalone/sirius-adapter.min.js)
+
 
 ## Testing
 All tests suits & mock can be found in the ./tests folder.
