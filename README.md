@@ -25,6 +25,10 @@ Using *yarn*
 
 `yarn add @edgarjeremy/sirius.adapter`
 
+Browser
+
+`<script src="https://unpkg.com/@edgarjeremy/sirius.adapter@1.0.5/dist/bundles/sirius.adapter.js"></script>`
+
 ## Testing
 All tests suits & mock can be found in the ./tests folder.
 
@@ -52,7 +56,7 @@ new SiriusAdapter(backendURL: string, port?: number)
 Example
 
 ```javascript
-import SiriusAdapter from 'sirius-adapter';
+import SiriusAdapter from '@edgarjeremy/sirius.adapter';
 
 const adapter = new SiriusAdapter('localhost', 1234);
 // or
