@@ -1,5 +1,5 @@
-# sirius-connect
-sirius-connect is a module to connect to a [sirius.js](https://github.com/EdgarJeremy/sirius.js)/[sirius.ts](https://github.com/EdgarJeremy/sirius.ts)-crafted backend. It automatically detects and provide a model representation to each models in the backend that can be used to manipulate the representative model. Making it a real-life ORM for the frontend.
+# sirius.adapter
+sirius.adapter is a module to connect to a [sirius.js](https://github.com/EdgarJeremy/sirius.js)/[sirius.ts](https://github.com/EdgarJeremy/sirius.ts)-crafted backend. It automatically detects and provide a model representation to each models in the backend that can be used to manipulate the representative model. Making it a real-life ORM for the frontend.
 
 sirius-connect also provide the ability to manage auth & session under-the-hood.
 
@@ -19,11 +19,11 @@ sirius-connect also provide the ability to manage auth & session under-the-hood.
 ## Installation
 Using *npm*
 
-`npm install sirius-connect --save`
+`npm install @edgarjeremy/sirius.adapter --save`
 
 Using *yarn*
 
-`yarn add sirius-connect`
+`yarn add @edgarjeremy/sirius.adapter`
 
 ## Testing
 All tests suits & mock can be found in the ./tests folder.
