@@ -1,6 +1,6 @@
 import { IHttp } from '../tools/request';
 import ModelInstance from './ModelInstance';
-import Utility from './utility';
+import Utility from './Utility';
 
 export default class AuthProvider {
 	private $basepoint: string;
