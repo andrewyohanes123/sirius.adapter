@@ -6,7 +6,7 @@
   "types": "dist/index.d.ts",
   "scripts": {
     "test": "jest --verbose --config jestconfig.json",
-    "build": "rm -rf ./dist && tsc && browserify ./dist/index.js -o ./dist/bundles/sirius.adapter.js",
+    "build": "rm -rf ./dist && tsc && mkdir ./dist/standalone && browserify ./dist/standalone.js -d --s SiriusAdapter > ./dist/standalone/sirius-adapter.js",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json",
     "prepare": "npm run build",
