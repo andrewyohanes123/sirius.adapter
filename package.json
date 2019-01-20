@@ -1,0 +1,48 @@
+{
+  "name": "sirius.adapter",
+  "version": "1.0.0",
+  "description": "Adapter for sirius backend connection",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "jest --verbose --config jestconfig.json",
+    "build": "rm -rf ./dist && tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json",
+
+    "prepare": "npm run build",
+    "prepublishOnly": "npm test && npm run lint",
+    "preversion": "npm run lint",
+    "version": "npm run format && git add .",
+    "postversion": "git push && git push --tags"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdgarJeremy/sirius.adapter.git"
+  },
+  "author": "edgarjeremy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/EdgarJeremy/sirius.adapter/issues"
+  },
+  "homepage": "https://github.com/EdgarJeremy/sirius.adapter#readme",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "lodash": "^4.17.11"
+  },
+  "devDependencies": {
+    "@types/node": "^10.12.18",
+    "@types/faker": "^4.1.5",
+    "@types/jest": "^23.3.13",
+    "faker": "^4.1.0",
+    "jest": "^23.6.0",
+    "prettier": "^1.15.3",
+    "ts-jest": "^23.10.5",
+    "tslint": "^5.12.1",
+    "tslint-config-prettier": "^1.17.0",
+    "typescript": "^3.2.4"
+  },
+  "files": [
+    "lib/**/*"
+  ]
+}
