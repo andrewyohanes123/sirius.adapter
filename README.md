@@ -10,14 +10,14 @@ sirius-connect also provide the ability to manage auth & session under-the-hood.
 2. [Testing](#test)
 3. [Concepts](#concept)
 4. [Usage](#usage)
-   -  [Initialization](#usage-initialize)
-   -  [Connecting to backend](#usage-fmf)
-   -  [Fetching instances](#usage-fmi)
-   -  [Creating new instance](#usage-cnmi)
-   -  [Manipulating instance](#usage-uai)
-   -  [Authorization](#usage-sad)
-   -  [Error Handling](#)
-5. [Using with another backend]()
+   -  [Initialization](#initialization)
+   -  [Connecting to backend](#connecting-to-backend)
+   -  [Fetching instances](#fetching-instances)
+   -  [Creating a new instance](#creating-a-new-instance)
+   -  [Manipulating instance](#manipulating-instances)
+   -  [Authorization](#authorization)
+   -  [Error Handling](#error-handling)
+5. [Using with another backend](#using-with-another-backend)
 
 ## Installation
 
