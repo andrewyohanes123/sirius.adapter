@@ -2,6 +2,11 @@ import { IHttp } from '../tools/request';
 import ModelInstance from './ModelInstance';
 import Utility, { ICollectionResult } from './Utility';
 
+export interface ICollectionOptions {
+	limit: number;
+	offset: number;
+}
+
 export default class ModelFactory {
 	private $basepoint: string;
 	private $http: IHttp;
@@ -13,8 +18,8 @@ export default class ModelFactory {
 		this.$utility = new Utility(basepoint, http);
 	}
 
-	public collection() {
-		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET');
+	public collection(options: ICollectionOptions) {
+		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET', { params: { ...options }});
 
 		return this.$utility.prepareCompletion<ICollectionResult>(requestInstance, 'collection');
 	}
