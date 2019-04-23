@@ -19,7 +19,7 @@ export default class ModelFactory {
 	}
 
 	public collection(options: ICollectionOptions) {
-		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET', { params: { ...options }});
+		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET', { params: { ...options } });
 
 		return this.$utility.prepareCompletion<ICollectionResult>(requestInstance, 'collection');
 	}
