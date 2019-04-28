@@ -3,8 +3,15 @@ import ModelInstance from './ModelInstance';
 import Utility, { ICollectionResult } from './Utility';
 
 export interface ICollectionOptions {
-	limit: number;
-	offset: number;
+	limit?: number;
+	offset?: number;
+	attributes?: string[];
+	include?: ICollectionIncludeOptions[];
+	order?: string[] | string[][];
+}
+
+interface ICollectionIncludeOptions extends ICollectionOptions {
+	model: string;
 }
 
 export default class ModelFactory {
@@ -18,8 +25,9 @@ export default class ModelFactory {
 		this.$utility = new Utility(basepoint, http);
 	}
 
-	public collection(options: ICollectionOptions) {
-		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET', { params: { ...options } });
+	public collection(options: ICollectionOptions = { attributes: ['id'] }) {
+		const query: string = (new Buffer(JSON.stringify(options))).toString('base64');
+		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET', { params: { q: query } });
 
 		return this.$utility.prepareCompletion<ICollectionResult>(requestInstance, 'collection');
 	}

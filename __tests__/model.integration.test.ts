@@ -3,7 +3,7 @@ import Adapter, { IModelFactory } from '../src';
 import ModelInstance from '../src/libs/ModelInstance';
 import '../src/setupMocks';
 
-const backendURL = 'https://sirius-adapter-mock-server.herokuapp.com';
+const backendURL = 'https://sirius-ts.herokuapp.com';
 const port = 80;
 const adapter = new Adapter(backendURL, port);
 
