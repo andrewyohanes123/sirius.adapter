@@ -15,6 +15,7 @@ sirius-connect also provide the ability to manage auth & session under-the-hood.
    -  [Fetching instances](#fetching-instances)
    -  [Creating a new instance](#creating-a-new-instance)
    -  [Manipulating instance](#manipulating-instances)
+   -  [Options](#options)
    -  [Authorization](#authorization)
    -  [Error Handling](#error-handling)
 5. [Using with another backend](#using-with-another-backend)
@@ -205,6 +206,20 @@ user.delete(): Promise<ModelInstance>;
 ```
 
 since the methods are called on the instance itself, it automatically knows the id of the instance and use that to tell the backend which row to manipulate.
+
+### Options
+You can define how the response will structured with the options object
+
+Signature:
+```javascript
+options: {
+	limit?: number;
+	offset?: number;
+	attributes?: string[];
+	include?: ICollectionIncludeOptions[];
+	order?: string[] | string[][];
+}
+```
 
 ### Authorization
 

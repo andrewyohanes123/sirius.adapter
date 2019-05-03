@@ -26,14 +26,21 @@ export default class ModelFactory {
 	}
 
 	public collection(options: ICollectionOptions = { attributes: ['id'] }) {
+		if (options.attributes) {
+			options.attributes.push('id');
+		}
 		const query: string = new Buffer(JSON.stringify(options)).toString('base64');
 		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET', { params: { q: query } });
 
 		return this.$utility.prepareCompletion<ICollectionResult>(requestInstance, 'collection');
 	}
 
-	public single(id: number) {
-		const requestInstance = this.$http(`${this.$basepoint}/${id}`, 'GET');
+	public single(id: number, options: ICollectionOptions = { attributes: ['id'] }) {
+		if (options.attributes) {
+			options.attributes.push('id');
+		}
+		const query: string = new Buffer(JSON.stringify(options)).toString('base64');
+		const requestInstance = this.$http(`${this.$basepoint}/${id}`, 'GET', { params: { q: query } });
 
 		return this.$utility.prepareCompletion<ModelInstance>(requestInstance, 'single');
 	}
