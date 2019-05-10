@@ -31,6 +31,8 @@ export default class AuthProvider {
 	}
 
 	public remove() {
+		localStorage.removeItem('accessToken');
+		localStorage.removeItem('refreshToken');
 		return this.$http(`${this.$basepoint}/`, 'DELETE');
 	}
 }
