@@ -26,6 +26,7 @@ const Request: IRequest = (backendURL: string, port: number = 1234) => {
 		const config = {
 			headers: { 'x-access-token': accessToken, 'x-refresh-token': refreshToken },
 			params: options.params,
+			withCredentials: true
 		};
 
 		switch (method) {
