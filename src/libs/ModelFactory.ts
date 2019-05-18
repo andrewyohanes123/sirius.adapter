@@ -8,6 +8,9 @@ export interface ICollectionOptions {
 	attributes?: string[];
 	include?: ICollectionIncludeOptions[];
 	order?: string[] | string[][];
+	where?: {
+		[s: string]: any
+	}
 }
 
 interface ICollectionIncludeOptions extends ICollectionOptions {
