@@ -1,6 +1,6 @@
 {
   "name": "@edgarjeremy/sirius.adapter",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "description": "Adapter for sirius backend connection",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
