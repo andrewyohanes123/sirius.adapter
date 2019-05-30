@@ -1,3 +1,4 @@
+import { Buffer } from 'buffer';
 import { IHttp } from '../tools/request';
 import ModelInstance from './ModelInstance';
 import Utility, { ICollectionResult } from './Utility';
