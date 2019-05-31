@@ -33,7 +33,7 @@ export default class ModelFactory {
 		if (options.attributes) {
 			options.attributes.push('id');
 		}
-		const query: string = new Buffer(JSON.stringify(options)).toString('base64');
+		const query: string = this.$utility.toBase64(JSON.stringify(options));
 		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET', { params: { q: query } });
 
 		return this.$utility.prepareCompletion<ICollectionResult>(requestInstance, 'collection');
@@ -43,7 +43,7 @@ export default class ModelFactory {
 		if (options.attributes) {
 			options.attributes.push('id');
 		}
-		const query: string = new Buffer(JSON.stringify(options)).toString('base64');
+		const query: string = this.$utility.toBase64(JSON.stringify(options));
 		const requestInstance = this.$http(`${this.$basepoint}/${id}`, 'GET', { params: { q: query } });
 
 		return this.$utility.prepareCompletion<ModelInstance>(requestInstance, 'single');
