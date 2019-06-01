@@ -63,11 +63,7 @@ export default class Utility {
 	}
 
 	public toBase64(s: string): string {
-		if (global.Buffer) {
-			return new Buffer(s).toString('base64');
-		} else {
-			return btoa(s);
-		}
+		return btoa(s);
 	}
 
 	private handleTokenRenewal(response: AxiosResponse<any>) {
