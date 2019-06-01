@@ -1,4 +1,5 @@
 import { AxiosError, AxiosPromise, AxiosResponse } from 'axios';
+import * as base64 from 'base-64';
 import { IHttp } from '../tools/request';
 import ModelInstance, { IDataValues } from './ModelInstance';
 
@@ -63,7 +64,7 @@ export default class Utility {
 	}
 
 	public toBase64(s: string): string {
-		return btoa(s);
+		return base64.encode(s);
 	}
 
 	private handleTokenRenewal(response: AxiosResponse<any>) {
