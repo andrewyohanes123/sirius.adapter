@@ -22,7 +22,7 @@ export type IRequest = (backendURL: string, port: number, storage: IStorage) => 
 const Request: IRequest = (backendURL: string, port: number = 1234, storage: IStorage = localStorage) => {
 	const baseURL = `${backendURL}${port !== 80 ? `:${port}` : ''}/api/`;
 
-	const http: IHttp = async(
+	const http: IHttp = async (
 		route: string = '',
 		method: 'GET' | 'POST' | 'PUT' | 'DELETE',
 		options: IRequestOptions = {},

@@ -23,7 +23,9 @@ export default class Utility {
 		requestInstance = requestInstance.then(this.handleTokenRenewal);
 		return requestInstance.then((res) => ({
 			count: res.data.count,
-			rows: res.data.rows.map((row: IDataValues) => new ModelInstance(row, this.$basepoint, this.$http, this.$storage)),
+			rows: res.data.rows.map(
+				(row: IDataValues) => new ModelInstance(row, this.$basepoint, this.$http, this.$storage),
+			),
 		}));
 	}
 
