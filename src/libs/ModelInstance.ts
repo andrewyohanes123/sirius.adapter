@@ -1,4 +1,4 @@
-import { IHttp } from '../tools/request';
+import { IHttp, IStorage } from '../tools/request';
 import Utility from './Utility';
 
 export interface IModelInstance {
@@ -20,11 +20,11 @@ export default class ModelInstance implements IModelInstance {
 
 	[k: string]: any;
 
-	constructor(dataValues: IDataValues, basepoint: string, http: IHttp) {
+	constructor(dataValues: IDataValues, basepoint: string, http: IHttp, storage: IStorage = localStorage) {
 		this.$rawJSON = dataValues;
 		this.$basepoint = basepoint;
 		this.$http = http;
-		this.$utility = new Utility(basepoint, http);
+		this.$utility = new Utility(basepoint, http, storage);
 		this.id = dataValues.id;
 
 		Object.keys(dataValues).forEach((key) => {

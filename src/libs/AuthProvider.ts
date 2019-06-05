@@ -1,16 +1,18 @@
-import { IHttp } from '../tools/request';
+import { IHttp, IStorage } from '../tools/request';
 import ModelInstance from './ModelInstance';
 import Utility from './Utility';
 
 export default class AuthProvider {
 	private $basepoint: string;
 	private $http: IHttp;
+	private $storage: IStorage;
 	private $utility: Utility;
 
-	constructor(basepoint: string, http: IHttp) {
+	constructor(basepoint: string, http: IHttp, storage: IStorage = localStorage) {
 		this.$basepoint = basepoint;
 		this.$http = http;
-		this.$utility = new Utility(basepoint, http);
+		this.$storage = storage;
+		this.$utility = new Utility(basepoint, http, storage);
 	}
 
 	public get() {
@@ -20,19 +22,19 @@ export default class AuthProvider {
 	}
 
 	public set(data: any) {
-		const requestInstance = this.$http(`${this.$basepoint}/`, 'POST', { body: data }).then((res) => {
+		const requestInstance = this.$http(`${this.$basepoint}/`, 'POST', { body: data }).then(async (res) => {
 			const { tokens, user } = res.data.data;
-			localStorage.setItem('accessToken', tokens.token);
-			localStorage.setItem('refreshToken', tokens.refreshToken);
+			await this.$storage.setItem('accessToken', tokens.token);
+			await this.$storage.setItem('refreshToken', tokens.refreshToken);
 			return new ModelInstance(user, this.$basepoint, this.$http);
 		});
 
 		return requestInstance;
 	}
 
-	public remove() {
-		localStorage.removeItem('accessToken');
-		localStorage.removeItem('refreshToken');
+	public async remove() {
+		await this.$storage.removeItem('accessToken');
+		await this.$storage.removeItem('refreshToken');
 		return this.$http(`${this.$basepoint}/`, 'DELETE');
 	}
 }

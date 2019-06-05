@@ -1,6 +1,6 @@
 import { AxiosError, AxiosPromise, AxiosResponse } from 'axios';
 import * as base64 from 'base-64';
-import { IHttp } from '../tools/request';
+import { IHttp, IStorage } from '../tools/request';
 import ModelInstance, { IDataValues } from './ModelInstance';
 
 export interface ICollectionResult {
@@ -11,23 +11,25 @@ export interface ICollectionResult {
 export default class Utility {
 	private $basepoint: string;
 	private $http: IHttp;
+	private $storage: IStorage;
 
-	constructor(basepoint: string, http: IHttp) {
+	constructor(basepoint: string, http: IHttp, storage: IStorage = localStorage) {
 		this.$basepoint = basepoint;
 		this.$http = http;
+		this.$storage = storage;
 	}
 
 	public responseToInstances(requestInstance: AxiosPromise<any>): Promise<any> {
 		requestInstance = requestInstance.then(this.handleTokenRenewal);
 		return requestInstance.then((res) => ({
 			count: res.data.count,
-			rows: res.data.rows.map((row: IDataValues) => new ModelInstance(row, this.$basepoint, this.$http)),
+			rows: res.data.rows.map((row: IDataValues) => new ModelInstance(row, this.$basepoint, this.$http, this.$storage)),
 		}));
 	}
 
 	public responseToInstance(requestInstance: AxiosPromise<any>): Promise<any> {
 		requestInstance = requestInstance.then(this.handleTokenRenewal);
-		return requestInstance.then((res) => new ModelInstance(res.data, this.$basepoint, this.$http));
+		return requestInstance.then((res) => new ModelInstance(res.data, this.$basepoint, this.$http, this.$storage));
 	}
 
 	public prepareCompletion<T>(
@@ -67,13 +69,13 @@ export default class Utility {
 		return base64.encode(s);
 	}
 
-	private handleTokenRenewal(response: AxiosResponse<any>) {
+	private async handleTokenRenewal(response: AxiosResponse<any>) {
 		if (response) {
 			const accessToken = response.headers['x-access-token'];
 			const refreshToken = response.headers['x-refresh-token'];
 			if (accessToken && refreshToken) {
-				localStorage.setItem('accessToken', accessToken);
-				localStorage.setItem('refreshToken', refreshToken);
+				await this.$storage.setItem('accessToken', accessToken);
+				await this.$storage.setItem('refreshToken', refreshToken);
 			}
 			return response.data;
 		}

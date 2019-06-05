@@ -5,24 +5,30 @@ export interface IRequestOptions {
 	body?: any;
 }
 
+export interface IStorage {
+	getItem(key: string): string | null | Promise<string> | Promise<null>;
+	setItem(key: string, value: string): void | Promise<void>;
+	removeItem(key: string): void | Promise<void>;
+}
+
 export type IHttp = (
 	route: string,
 	method: 'GET' | 'POST' | 'PUT' | 'DELETE',
 	options?: IRequestOptions,
 ) => AxiosPromise<any>;
 
-export type IRequest = (backendURL: string, port: number) => IHttp;
+export type IRequest = (backendURL: string, port: number, storage: IStorage) => IHttp;
 
-const Request: IRequest = (backendURL: string, port: number = 1234) => {
+const Request: IRequest = (backendURL: string, port: number = 1234, storage: IStorage = localStorage) => {
 	const baseURL = `${backendURL}${port !== 80 ? `:${port}` : ''}/api/`;
 
-	const http: IHttp = (
+	const http: IHttp = async(
 		route: string = '',
 		method: 'GET' | 'POST' | 'PUT' | 'DELETE',
 		options: IRequestOptions = {},
 	) => {
-		const accessToken = localStorage.getItem('accessToken');
-		const refreshToken = localStorage.getItem('refreshToken');
+		const accessToken = await storage.getItem('accessToken');
+		const refreshToken = await storage.getItem('refreshToken');
 		const config = {
 			headers: { 'x-access-token': accessToken, 'x-refresh-token': refreshToken },
 			params: options.params,

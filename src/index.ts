@@ -1,7 +1,7 @@
 import axios from 'axios';
 import AuthProvider from './libs/AuthProvider';
 import ModelFactory from './libs/ModelFactory';
-import Request, { IHttp } from './tools/request';
+import Request, { IHttp, IStorage } from './tools/request';
 
 export interface IModelFactory {
 	[k: string]: ModelFactory;
@@ -11,12 +11,14 @@ export default class Adapter {
 	private $backendURL: string;
 	private $port: number;
 	private $http: IHttp;
+	private $storage: IStorage;
 	private $models: IModelFactory;
 
-	constructor(backendURL: string, port: number = 1234) {
+	constructor(backendURL: string, port: number = 1234, storage: IStorage = localStorage) {
 		this.$backendURL = backendURL;
 		this.$port = port;
-		this.$http = Request(backendURL, port);
+		this.$http = Request(backendURL, port, storage);
+		this.$storage = storage;
 		this.$models = {};
 	}
 
@@ -37,7 +39,7 @@ export default class Adapter {
 	private _buildModel(meta: any) {
 		const { models = [] } = meta;
 		models.forEach((model: { name: string; basepoint: string }) => {
-			this.$models[model.name] = new ModelFactory(model.basepoint, this.$http);
+			this.$models[model.name] = new ModelFactory(model.basepoint, this.$http, this.$storage);
 		});
 		return this.$models;
 	}
