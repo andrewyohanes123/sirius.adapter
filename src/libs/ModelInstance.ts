@@ -20,7 +20,7 @@ export default class ModelInstance implements IModelInstance {
 
 	[k: string]: any;
 
-	constructor(dataValues: IDataValues, basepoint: string, http: IHttp, storage: IStorage = localStorage) {
+	constructor(dataValues: IDataValues, basepoint: string, http: IHttp, storage: IStorage) {
 		this.$rawJSON = dataValues;
 		this.$basepoint = basepoint;
 		this.$http = http;

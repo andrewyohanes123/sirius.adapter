@@ -4,7 +4,7 @@ import '../src/setupMocks';
 
 const backendURL = 'https://sirius-ts.herokuapp.com';
 const port = 80;
-const adapter = new Adapter(backendURL, port);
+const adapter = new Adapter(backendURL, port, localStorage);
 
 describe('AuthProvider Test', () => {
 	const provider = adapter.getAuthProvider();

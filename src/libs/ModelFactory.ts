@@ -22,7 +22,7 @@ export default class ModelFactory {
 	private $http: IHttp;
 	private $utility: Utility;
 
-	constructor(basepoint: string, http: IHttp, storage: IStorage = localStorage) {
+	constructor(basepoint: string, http: IHttp, storage: IStorage) {
 		this.$basepoint = basepoint;
 		this.$http = http;
 		this.$utility = new Utility(basepoint, http, storage);

@@ -19,7 +19,7 @@ export type IHttp = (
 
 export type IRequest = (backendURL: string, port: number, storage: IStorage) => IHttp;
 
-const Request: IRequest = (backendURL: string, port: number = 1234, storage: IStorage = localStorage) => {
+const Request: IRequest = (backendURL: string, port: number = 1234, storage: IStorage) => {
 	const baseURL = `${backendURL}${port !== 80 ? `:${port}` : ''}/api/`;
 
 	const http: IHttp = async (

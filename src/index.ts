@@ -14,7 +14,7 @@ export default class Adapter {
 	private $storage: IStorage;
 	private $models: IModelFactory;
 
-	constructor(backendURL: string, port: number = 1234, storage: IStorage = localStorage) {
+	constructor(backendURL: string, port: number = 1234, storage: IStorage) {
 		this.$backendURL = backendURL;
 		this.$port = port;
 		this.$http = Request(backendURL, port, storage);
@@ -33,7 +33,7 @@ export default class Adapter {
 	}
 
 	public getAuthProvider() {
-		return new AuthProvider('auth', this.$http);
+		return new AuthProvider('auth', this.$http, this.$storage);
 	}
 
 	private _buildModel(meta: any) {

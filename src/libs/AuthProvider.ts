@@ -8,7 +8,7 @@ export default class AuthProvider {
 	private $storage: IStorage;
 	private $utility: Utility;
 
-	constructor(basepoint: string, http: IHttp, storage: IStorage = localStorage) {
+	constructor(basepoint: string, http: IHttp, storage: IStorage) {
 		this.$basepoint = basepoint;
 		this.$http = http;
 		this.$storage = storage;
@@ -26,7 +26,7 @@ export default class AuthProvider {
 			const { tokens, user } = res.data.data;
 			await this.$storage.setItem('accessToken', tokens.token);
 			await this.$storage.setItem('refreshToken', tokens.refreshToken);
-			return new ModelInstance(user, this.$basepoint, this.$http);
+			return new ModelInstance(user, this.$basepoint, this.$http, this.$storage);
 		});
 
 		return requestInstance;

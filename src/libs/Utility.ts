@@ -13,7 +13,7 @@ export default class Utility {
 	private $http: IHttp;
 	private $storage: IStorage;
 
-	constructor(basepoint: string, http: IHttp, storage: IStorage = localStorage) {
+	constructor(basepoint: string, http: IHttp, storage: IStorage) {
 		this.$basepoint = basepoint;
 		this.$http = http;
 		this.$storage = storage;
