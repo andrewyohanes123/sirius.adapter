@@ -20,7 +20,7 @@ export default class Utility {
 	}
 
 	public responseToInstances(requestInstance: AxiosPromise<any>): Promise<any> {
-		requestInstance = requestInstance.then(this.handleTokenRenewal);
+		requestInstance = requestInstance.then(this.handleTokenRenewal.bind(this));
 		return requestInstance.then((res) => ({
 			count: res.data.count,
 			rows: res.data.rows.map(
@@ -30,7 +30,7 @@ export default class Utility {
 	}
 
 	public responseToInstance(requestInstance: AxiosPromise<any>): Promise<any> {
-		requestInstance = requestInstance.then(this.handleTokenRenewal);
+		requestInstance = requestInstance.then(this.handleTokenRenewal.bind(this));
 		return requestInstance.then((res) => new ModelInstance(res.data, this.$basepoint, this.$http, this.$storage));
 	}
 
