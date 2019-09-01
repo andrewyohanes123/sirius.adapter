@@ -16,8 +16,8 @@ export default class Adapter {
 	private $storage: IStorage;
 	private $models: IModelFactory;
 
-	constructor(backendURL: string, port: number = 1234, storage: IStorage) {
-		this.$adapterId = uuidv4();
+	constructor(backendURL: string, port: number = 1234, storage: IStorage, adapterId: string = 'app') {
+		this.$adapterId = adapterId;
 		this.$backendURL = backendURL;
 		this.$port = port;
 		this.$http = Request(backendURL, port, storage, this.$adapterId);
