@@ -33,7 +33,9 @@ export default class Utility {
 
 	public responseToInstance(requestInstance: AxiosPromise<any>): Promise<any> {
 		requestInstance = requestInstance.then(this.handleTokenRenewal.bind(this));
-		return requestInstance.then((res) => new ModelInstance(res.data, this.$basepoint, this.$http, this.$storage, this.$adapterId));
+		return requestInstance.then(
+			(res) => new ModelInstance(res.data, this.$basepoint, this.$http, this.$storage, this.$adapterId),
+		);
 	}
 
 	public prepareCompletion<T>(
