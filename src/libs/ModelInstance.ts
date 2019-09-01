@@ -20,11 +20,11 @@ export default class ModelInstance implements IModelInstance {
 
 	[k: string]: any;
 
-	constructor(dataValues: IDataValues, basepoint: string, http: IHttp, storage: IStorage) {
+	constructor(dataValues: IDataValues, basepoint: string, http: IHttp, storage: IStorage, adapterId: string) {
 		this.$rawJSON = dataValues;
 		this.$basepoint = basepoint;
 		this.$http = http;
-		this.$utility = new Utility(basepoint, http, storage);
+		this.$utility = new Utility(basepoint, http, storage, adapterId);
 		this.id = dataValues.id;
 
 		Object.keys(dataValues).forEach((key) => {

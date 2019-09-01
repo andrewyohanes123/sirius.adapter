@@ -21,11 +21,13 @@ export default class ModelFactory {
 	private $basepoint: string;
 	private $http: IHttp;
 	private $utility: Utility;
+	private $adapterId: string;
 
-	constructor(basepoint: string, http: IHttp, storage: IStorage) {
+	constructor(basepoint: string, http: IHttp, storage: IStorage, adapterId: string) {
 		this.$basepoint = basepoint;
 		this.$http = http;
-		this.$utility = new Utility(basepoint, http, storage);
+		this.$utility = new Utility(basepoint, http, storage, adapterId);
+		this.$adapterId = adapterId;
 	}
 
 	public collection(options: ICollectionOptions = { attributes: ['id'] }) {

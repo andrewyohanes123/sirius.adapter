@@ -12,11 +12,13 @@ export default class Utility {
 	private $basepoint: string;
 	private $http: IHttp;
 	private $storage: IStorage;
+	private $adapterId: string;
 
-	constructor(basepoint: string, http: IHttp, storage: IStorage) {
+	constructor(basepoint: string, http: IHttp, storage: IStorage, adapterId: string) {
 		this.$basepoint = basepoint;
 		this.$http = http;
 		this.$storage = storage;
+		this.$adapterId = adapterId;
 	}
 
 	public responseToInstances(requestInstance: AxiosPromise<any>): Promise<any> {
@@ -24,14 +26,14 @@ export default class Utility {
 		return requestInstance.then((res) => ({
 			count: res.data.count,
 			rows: res.data.rows.map(
-				(row: IDataValues) => new ModelInstance(row, this.$basepoint, this.$http, this.$storage),
+				(row: IDataValues) => new ModelInstance(row, this.$basepoint, this.$http, this.$storage, this.$adapterId),
 			),
 		}));
 	}
 
 	public responseToInstance(requestInstance: AxiosPromise<any>): Promise<any> {
 		requestInstance = requestInstance.then(this.handleTokenRenewal.bind(this));
-		return requestInstance.then((res) => new ModelInstance(res.data, this.$basepoint, this.$http, this.$storage));
+		return requestInstance.then((res) => new ModelInstance(res.data, this.$basepoint, this.$http, this.$storage, this.$adapterId));
 	}
 
 	public prepareCompletion<T>(
@@ -76,8 +78,8 @@ export default class Utility {
 			const accessToken = response.headers['x-access-token'];
 			const refreshToken = response.headers['x-refresh-token'];
 			if (accessToken && refreshToken) {
-				await this.$storage.setItem('accessToken', accessToken);
-				await this.$storage.setItem('refreshToken', refreshToken);
+				await this.$storage.setItem(`${this.$adapterId}_accessToken`, accessToken);
+				await this.$storage.setItem(`${this.$adapterId}_refreshToken`, refreshToken);
 			}
 			return response.data;
 		}

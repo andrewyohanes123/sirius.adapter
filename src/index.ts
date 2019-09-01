@@ -1,4 +1,5 @@
 import axios from 'axios';
+import * as uniqid from 'uniqid';
 import AuthProvider from './libs/AuthProvider';
 import ModelFactory from './libs/ModelFactory';
 import Request, { IHttp, IStorage } from './tools/request';
@@ -8,6 +9,7 @@ export interface IModelFactory {
 }
 
 export default class Adapter {
+	private $adapterId: string;
 	private $backendURL: string;
 	private $port: number;
 	private $http: IHttp;
@@ -15,9 +17,10 @@ export default class Adapter {
 	private $models: IModelFactory;
 
 	constructor(backendURL: string, port: number = 1234, storage: IStorage) {
+		this.$adapterId = uniqid();
 		this.$backendURL = backendURL;
 		this.$port = port;
-		this.$http = Request(backendURL, port, storage);
+		this.$http = Request(backendURL, port, storage, this.$adapterId);
 		this.$storage = storage;
 		this.$models = {};
 	}
@@ -33,13 +36,13 @@ export default class Adapter {
 	}
 
 	public getAuthProvider() {
-		return new AuthProvider('auth', this.$http, this.$storage);
+		return new AuthProvider('auth', this.$http, this.$storage, this.$adapterId);
 	}
 
 	private _buildModel(meta: any) {
 		const { models = [] } = meta;
 		models.forEach((model: { name: string; basepoint: string }) => {
-			this.$models[model.name] = new ModelFactory(model.basepoint, this.$http, this.$storage);
+			this.$models[model.name] = new ModelFactory(model.basepoint, this.$http, this.$storage, this.$adapterId);
 		});
 		return this.$models;
 	}
