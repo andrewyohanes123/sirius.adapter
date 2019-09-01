@@ -1,5 +1,5 @@
 import axios from 'axios';
-import * as uniqid from 'uniqid';
+import * as uuidv4 from 'uuid/v4';
 import AuthProvider from './libs/AuthProvider';
 import ModelFactory from './libs/ModelFactory';
 import Request, { IHttp, IStorage } from './tools/request';
@@ -17,7 +17,7 @@ export default class Adapter {
 	private $models: IModelFactory;
 
 	constructor(backendURL: string, port: number = 1234, storage: IStorage) {
-		this.$adapterId = uniqid();
+		this.$adapterId = uuidv4();
 		this.$backendURL = backendURL;
 		this.$port = port;
 		this.$http = Request(backendURL, port, storage, this.$adapterId);
