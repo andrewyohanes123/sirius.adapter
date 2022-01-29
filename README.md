@@ -24,11 +24,11 @@ sirius-connect also provide the ability to manage auth & session under-the-hood.
 
 Using _npm_
 
-`npm install @edgarjeremy/sirius.adapter --save`
+`npm install forked.sirius.adapter --save`
 
 Using _yarn_
 
-`yarn add @edgarjeremy/sirius.adapter`
+`yarn add forked.sirius.adapter`
 
 Browser
 
@@ -68,7 +68,7 @@ new SiriusAdapter(backendURL: string, port?: number)
 Example
 
 ```javascript
-import SiriusAdapter from '@edgarjeremy/sirius.adapter';
+import SiriusAdapter from 'forked.sirius.adapter';
 
 const adapter = new SiriusAdapter('localhost', 1234);
 // or

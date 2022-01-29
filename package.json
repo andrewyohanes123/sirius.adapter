@@ -1,7 +1,7 @@
 {
-  "name": "@edgarjeremy/sirius.adapter",
-  "version": "1.0.24",
-  "description": "Adapter for sirius backend connection",
+  "name": "forked.sirius.adapter",
+  "version": "1.0.25",
+  "description": "Adapter for sirius backend connection (forked)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
@@ -18,14 +18,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/EdgarJeremy/sirius.adapter.git"
+    "url": "git+https://github.com/andrewyohanes123/sirius.adapter.git"
   },
   "author": "edgarjeremy",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/EdgarJeremy/sirius.adapter/issues"
+    "url": "https://github.com/andrewyohanes123/sirius.adapter/issues"
   },
-  "homepage": "https://github.com/EdgarJeremy/sirius.adapter#readme",
+  "homepage": "https://github.com/andrewyohanes123/sirius.adapter#readme",
   "dependencies": {
     "axios": "^0.18.0",
     "base-64": "^0.1.0",

@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios';
 import { IHttp, IStorage } from '../tools/request';
 import ModelInstance from './ModelInstance';
 import Utility, { ICollectionResult } from './Utility';
@@ -50,8 +51,8 @@ export default class ModelFactory {
 		return this.$utility.prepareCompletion<ModelInstance>(requestInstance, 'single');
 	}
 
-	public create(data: any) {
-		const requestInstance = this.$http(`${this.$basepoint}/`, 'POST', { body: data });
+	public create<T = any>(data: T, config?: AxiosRequestConfig) {
+		const requestInstance = this.$http(`${this.$basepoint}/`, 'POST', { body: data }, config);
 
 		return this.$utility.prepareCompletion<ModelInstance>(requestInstance, 'single');
 	}

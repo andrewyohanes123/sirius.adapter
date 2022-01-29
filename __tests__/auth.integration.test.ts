@@ -2,8 +2,8 @@ import Adapter from '../src';
 import ModelInstance from '../src/libs/ModelInstance';
 import '../src/setupMocks';
 
-const backendURL = 'https://sirius-ts.herokuapp.com';
-const port = 80;
+const backendURL = 'http://10.10.10.123';
+const port = 1234;
 const adapter = new Adapter(backendURL, port, localStorage);
 
 describe('AuthProvider Test', () => {
@@ -11,8 +11,8 @@ describe('AuthProvider Test', () => {
 
 	it('Can recognize a valid auth credentials', async () => {
 		const authData = await provider.set({
-			password: 'sherlocked',
-			username: 'edgar',
+			password: 'admin',
+			username: 'admin',
 		});
 		expect(authData).toBeInstanceOf(ModelInstance);
 	});

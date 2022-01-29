@@ -1,3 +1,4 @@
+import { AxiosRequestConfig } from 'axios';
 import { IHttp, IStorage } from '../tools/request';
 import Utility from './Utility';
 
@@ -32,14 +33,14 @@ export default class ModelInstance implements IModelInstance {
 		});
 	}
 
-	public save() {
-		const requestInstance = this.$http(`${this.$basepoint}/${this.id}`, 'POST', { body: this.rawJSON });
+	public save(config?: AxiosRequestConfig) {
+		const requestInstance = this.$http(`${this.$basepoint}/${this.id}`, 'POST', { body: this.rawJSON }, config);
 
 		return this.$utility.prepareCompletion<ModelInstance>(requestInstance, 'single');
 	}
 
-	public update(dataValues: any) {
-		const requestInstance = this.$http(`${this.$basepoint}/${this.id}`, 'PUT', { body: dataValues });
+	public update<T = any>(dataValues: T, config?: AxiosRequestConfig) {
+		const requestInstance = this.$http(`${this.$basepoint}/${this.id}`, 'PUT', { body: dataValues }, config);
 
 		return this.$utility.prepareCompletion<ModelInstance>(requestInstance, 'single');
 	}

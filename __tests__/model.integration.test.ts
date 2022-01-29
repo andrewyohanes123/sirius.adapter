@@ -3,8 +3,8 @@ import Adapter, { IModelFactory } from '../src';
 import ModelInstance from '../src/libs/ModelInstance';
 import '../src/setupMocks';
 
-const backendURL = 'https://sirius-ts.herokuapp.com';
-const port = 80;
+const backendURL = 'http://10.10.10.123';
+const port = 1234;
 const adapter = new Adapter(backendURL, port, localStorage);
 
 describe('Model Test', () => {
@@ -14,6 +14,7 @@ describe('Model Test', () => {
 		name: faker.name.findName(),
 		password: faker.internet.password(),
 		username: faker.internet.userName(),
+		type: "Admin"
 	};
 
 	beforeAll(async () => {
@@ -71,6 +72,7 @@ describe('Model Test', () => {
 			name: faker.name.findName(),
 			password: faker.internet.password(),
 			username: faker.internet.userName(),
+			type: "Admin"
 		};
 		const editedInstance = await testInstance.update(editData);
 
