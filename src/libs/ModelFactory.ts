@@ -17,7 +17,7 @@ export interface ICollectionOptions {
 interface ICollectionIncludeOptions extends ICollectionOptions {
 	model: string;
 	required?: boolean;
-	as: string;
+	as?: string;
 }
 
 export default class ModelFactory {
