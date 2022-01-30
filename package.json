@@ -1,6 +1,6 @@
 {
   "name": "forked.sirius.adapter",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "Adapter for sirius backend connection (forked)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
