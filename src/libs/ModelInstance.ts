@@ -2,7 +2,7 @@ import { AxiosRequestConfig } from 'axios';
 import { IHttp, IStorage } from '../tools/request';
 import Utility from './Utility';
 
-export interface IModelInstance {
+export interface IModelInstance<T = {}> {
 	[k: string]: any;
 }
 
