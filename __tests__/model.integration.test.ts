@@ -3,7 +3,7 @@ import Adapter, { IModelFactory } from '../src';
 import ModelInstance from '../src/libs/ModelInstance';
 import '../src/setupMocks';
 
-const backendURL = 'http://10.10.10.123';
+const backendURL = 'http://10.10.10.143';
 const port = 1234;
 const adapter = new Adapter(backendURL, port, localStorage);
 
@@ -14,7 +14,7 @@ describe('Model Test', () => {
 		name: faker.name.findName(),
 		password: faker.internet.password(),
 		username: faker.internet.userName(),
-		type: "Admin"
+		// type: "administrator"
 	};
 
 	beforeAll(async () => {
@@ -72,7 +72,7 @@ describe('Model Test', () => {
 			name: faker.name.findName(),
 			password: faker.internet.password(),
 			username: faker.internet.userName(),
-			type: "Admin"
+			// type: "administrator"
 		};
 		const editedInstance = await testInstance.update(editData);
 
