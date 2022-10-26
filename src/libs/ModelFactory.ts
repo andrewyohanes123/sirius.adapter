@@ -33,22 +33,22 @@ export default class ModelFactory {
 		this.$adapterId = adapterId;
 	}
 
-	public collection(options: ICollectionOptions = { attributes: ['id'] }) {
+	public collection(options: ICollectionOptions = { attributes: ['id'] }, config?: AxiosRequestConfig) {
 		if (options.attributes) {
 			options.attributes.push('id');
 		}
 		const query: string = this.$utility.toBase64(JSON.stringify(options));
-		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET', { params: { q: query } });
+		const requestInstance = this.$http(`${this.$basepoint}/`, 'GET', { params: { q: query } }, config);
 
 		return this.$utility.prepareCompletion<ICollectionResult>(requestInstance, 'collection');
 	}
 
-	public single(id: number, options: ICollectionOptions = { attributes: ['id'] }) {
+	public single(id: number, options: ICollectionOptions = { attributes: ['id'] }, config?: AxiosRequestConfig) {
 		if (options.attributes) {
 			options.attributes.push('id');
 		}
 		const query: string = this.$utility.toBase64(JSON.stringify(options));
-		const requestInstance = this.$http(`${this.$basepoint}/${id}`, 'GET', { params: { q: query } });
+		const requestInstance = this.$http(`${this.$basepoint}/${id}`, 'GET', { params: { q: query } }, config);
 
 		return this.$utility.prepareCompletion<ModelInstance>(requestInstance, 'single');
 	}

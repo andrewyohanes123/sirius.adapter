@@ -18,15 +18,28 @@ export type IHttp = (
 	config?: AxiosRequestConfig,
 ) => AxiosPromise<any>;
 
-export type IRequest = (backendURL: string, port: number, storage: IStorage, adapterId: string, additionalConfig?: AxiosRequestConfig) => IHttp;
+export type IRequest = (
+	backendURL: string,
+	port: number,
+	storage: IStorage,
+	adapterId: string,
+	additionalConfig?: AxiosRequestConfig,
+) => IHttp;
 
-const Request: IRequest = (backendURL: string, port: number = 1234, storage: IStorage, adapterId: string, additionalConfig?: AxiosRequestConfig) => {
+const Request: IRequest = (
+	backendURL: string,
+	port: number = 1234,
+	storage: IStorage,
+	adapterId: string,
+	additionalConfig?: AxiosRequestConfig,
+) => {
 	const baseURL = `${backendURL}${port !== 80 ? `:${port}` : ''}/api/`;
 
 	const http: IHttp = async (
 		route: string = '',
 		method: 'GET' | 'POST' | 'PUT' | 'DELETE',
 		options: IRequestOptions = {},
+		axiosConfig?: AxiosRequestConfig,
 	) => {
 		const accessToken = await storage.getItem(`${adapterId}_accessToken`);
 		const refreshToken = await storage.getItem(`${adapterId}_refreshToken`);
@@ -34,7 +47,8 @@ const Request: IRequest = (backendURL: string, port: number = 1234, storage: ISt
 			headers: { 'x-access-token': accessToken, 'x-refresh-token': refreshToken },
 			params: options.params,
 			withCredentials: true,
-			...additionalConfig
+			...additionalConfig,
+			...axiosConfig,
 		};
 
 		switch (method) {

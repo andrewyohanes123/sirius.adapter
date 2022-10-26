@@ -2,8 +2,8 @@ import Adapter from '../src';
 import ModelInstance from '../src/libs/ModelInstance';
 import '../src/setupMocks';
 
-const backendURL = 'http://10.10.10.143';
-const port = 1234;
+const backendURL = 'http://localhost';
+const port = 1235;
 const adapter = new Adapter(backendURL, port, localStorage);
 
 describe('AuthProvider Test', () => {
